@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <bean
+        id="jdbcTemplate"
+        class="org.springframework.jdbc.core.JdbcTemplate"
+        p:dataSource-ref="dataSource" />
+
+    <bean
+        id="hibernateTemplate"
+        class="org.springframework.orm.hibernate3.HibernateTemplate"
+        p:sessionFactory-ref="sessionFactory" />
+
+    <bean
+        id="stockCodeDao"
+        class="stidx.dao.StockCodeDao"
+        p:hibernateTemplate-ref="hibernateTemplate" />
+
+    <bean
+        id="bulkInsertInvest"
+        class="stidx.dao.BulkInsertInvest"
+        p:hibernateTemplate-ref="hibernateTemplate"
+        p:stockCodeDao-ref="stockCodeDao" />
+
+    <bean
+        id="bulkInsertForeign"
+        class="stidx.dao.BulkInsertForeign"
+        p:hibernateTemplate-ref="hibernateTemplate"
+        p:stockCodeDao-ref="stockCodeDao" />
+
+    <bean
+        id="bulkInsertForeignInvest"
+        class="stidx.dao.BulkInsertForeignInvest"
+        p:hibernateTemplate-ref="hibernateTemplate"
+        p:stockCodeDao-ref="stockCodeDao" />
+
+    <bean
+        id="bulkInsertStrMov"
+        class="stidx.dao.BulkInsertStrMov"
+        p:hibernateTemplate-ref="hibernateTemplate"
+        p:stockCodeDao-ref="stockCodeDao" />
+
+    <bean
+        id="bulkInsertTR20"
+        class="stidx.dao.BulkInsertTR20"
+        p:hibernateTemplate-ref="hibernateTemplate"
+        p:stockCodeDao-ref="stockCodeDao" />
+
+    <bean
+        id="listDTDao"
+        class="stidx.dao.ListDTDao"
+        p:hibernateTemplate-ref="hibernateTemplate"
+        p:stockCodeDao-ref="stockCodeDao" />
+
+
+</beans>

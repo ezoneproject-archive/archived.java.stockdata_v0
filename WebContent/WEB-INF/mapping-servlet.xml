@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+ <!-- 오류처리페이지 정의 (bean만 정의해도 디스패쳐에 알아서 삽입됨) -->
+    <bean
+        id="exceptionResolver"
+        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"
+        p:defaultErrorView="error">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">exception</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean
+        name="/index.do"
+        class="stidx.controllers.Index" />
+
+    <bean
+        name="/upload.do"
+        class="stidx.controllers.Upload" />
+
+    <bean
+        name="/detail.do"
+        class="stidx.controllers.DetailView"
+        p:listDT-ref="listDTDao" />
+
+    <bean
+        name="/diffview.do"
+        class="stidx.controllers.DiffView"
+        p:listDT-ref="listDTDao"
+        p:stockDT-ref="stockCodeDao" />
+
+    <bean
+        name="/uploadproc.do"
+        class="stidx.controllers.UploadProcess"
+        p:commandClass="stidx.controllers.form.UploadCommand"
+        p:commandName="upload"
+        p:validator-ref="uploadValidator" />
+
+    <bean
+        name="uploadValidator"
+        class="stidx.controllers.validator.UploadValidator" />
+
+    <bean
+        name="/view.do"
+        class="stidx.controllers.ListView" 
+        p:listDT-ref="listDTDao"/>
+
+</beans>

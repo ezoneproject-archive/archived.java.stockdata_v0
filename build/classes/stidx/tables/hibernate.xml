@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="stidx.tables">
+ <!-- 종목코드 테이블 -->
+ <class name="StockCode" table="STOCKCODE">
+  <id name="stockCode" column="STCODE" type="string">
+   <generator class="assigned" />
+  </id>
+
+  <property name="stockName" column="STNAME" type="string" />
+  <property name="categoryName" column="CATENAME" type="string" />
+ </class>
+
+ <!-- 기관잠정치매매 -->
+ <class name="InvestTrans" table="DTINVTR">
+  <composite-id>
+   <key-property name="gsDate" column="GSDATE" type="string" />
+   <key-property name="gsTime" column="GSTIME" type="string" />
+   <key-property name="stockCode" column="STCODE" type="string" />
+  </composite-id>
+
+  <property name="todayForeign" column="TD_FOREIGN" type="int" />
+  <property name="todayInvest" column="TD_INVEST" type="int" />
+  <property name="yestRate" column="YD_RATE" type="float" />
+  <property name="yestTransRate" column="YD_TR_RATE" type="float" />
+  <property name="subtotForeign" column="STOT_FOREIGN" type="int" />
+  <property name="subtotInvest" column="STOT_INVEST" type="int" />
+  <property name="yestForeign" column="YD_FOREIGN" type="int" />
+  <property name="yestInvest" column="YD_INVEST" type="int" />
+  <property name="rateReserve" column="RATE_RESERVE" type="float" />
+  <property name="EV_EBITDA" column="EV_EBITDA" type="float" />
+
+ </class>
+
+ <!-- 외인잠정치매매 -->
+ <class name="ForeignTrans" table="DTFGNTR">
+  <composite-id>
+   <key-property name="gsDate" column="GSDATE" type="string" />
+   <key-property name="gsTime" column="GSTIME" type="string" />
+   <key-property name="stockCode" column="STCODE" type="string" />
+  </composite-id>
+
+  <property name="todayForeign" column="TD_FOREIGN" type="int" />
+  <property name="todayInvest" column="TD_INVEST" type="int" />
+  <property name="yestRate" column="YD_RATE" type="float" />
+  <property name="yestTransRate" column="YD_TR_RATE" type="float" />
+  <property name="subtotForeign" column="STOT_FOREIGN" type="int" />
+  <property name="subtotInvest" column="STOT_INVEST" type="int" />
+  <property name="yestForeign" column="YD_FOREIGN" type="int" />
+  <property name="yestInvest" column="YD_INVEST" type="int" />
+  <property name="rateReserve" column="RATE_RESERVE" type="float" />
+  <property name="EV_EBITDA" column="EV_EBITDA" type="float" />
+ </class>
+
+ <!-- 외인기관 쌍끌이 잠정치매매 -->
+ <class name="ForeignInvestTrans" table="DTFGNINVTR">
+  <composite-id>
+   <key-property name="gsDate" column="GSDATE" type="string" />
+   <key-property name="gsTime" column="GSTIME" type="string" />
+   <key-property name="stockCode" column="STCODE" type="string" />
+  </composite-id>
+
+  <property name="todayForeign" column="TD_FOREIGN" type="int" />
+  <property name="todayInvest" column="TD_INVEST" type="int" />
+  <property name="yestRate" column="YD_RATE" type="float" />
+  <property name="yestTransRate" column="YD_TR_RATE" type="float" />
+  <property name="subtotForeign" column="STOT_FOREIGN" type="int" />
+  <property name="subtotInvest" column="STOT_INVEST" type="int" />
+  <property name="yestForeign" column="YD_FOREIGN" type="int" />
+  <property name="yestInvest" column="YD_INVEST" type="int" />
+  <property name="rateReserve" column="RATE_RESERVE" type="float" />
+  <property name="EV_EBITDA" column="EV_EBITDA" type="float" />
+ </class>
+
+ <!-- 강력출동 -->
+ <class name="StrMov" table="DTSTRMOV">
+  <composite-id>
+   <key-property name="gsDate" column="GSDATE" type="string" />
+   <key-property name="gsTime" column="GSTIME" type="string" />
+   <key-property name="stockCode" column="STCODE" type="string" />
+  </composite-id>
+
+  <property name="todayForeign" column="TD_FOREIGN" type="int" />
+  <property name="todayInvest" column="TD_INVEST" type="int" />
+  <property name="yestRate" column="YD_RATE" type="float" />
+  <property name="yestTransRate" column="YD_TR_RATE" type="float" />
+  <property name="subtotForeign" column="STOT_FOREIGN" type="int" />
+  <property name="subtotInvest" column="STOT_INVEST" type="int" />
+  <property name="yestForeign" column="YD_FOREIGN" type="int" />
+  <property name="yestInvest" column="YD_INVEST" type="int" />
+  <property name="rateReserve" column="RATE_RESERVE" type="float" />
+  <property name="EV_EBITDA" column="EV_EBITDA" type="float" />
+ </class>
+
+ <!-- 거래20이평 -->
+ <class name="TR20" table="DTTR20">
+  <composite-id>
+   <key-property name="gsDate" column="GSDATE" type="string" />
+   <key-property name="gsTime" column="GSTIME" type="string" />
+   <key-property name="stockCode" column="STCODE" type="string" />
+  </composite-id>
+
+  <property name="todayForeign" column="TD_FOREIGN" type="int" />
+  <property name="todayInvest" column="TD_INVEST" type="int" />
+  <property name="yestRate" column="YD_RATE" type="float" />
+  <property name="yestTransRate" column="YD_TR_RATE" type="float" />
+  <property name="subtotForeign" column="STOT_FOREIGN" type="int" />
+  <property name="subtotInvest" column="STOT_INVEST" type="int" />
+  <property name="yestForeign" column="YD_FOREIGN" type="int" />
+  <property name="yestInvest" column="YD_INVEST" type="int" />
+  <property name="rateReserve" column="RATE_RESERVE" type="float" />
+  <property name="EV_EBITDA" column="EV_EBITDA" type="float" />
+ </class>
+
+</hibernate-mapping>
+

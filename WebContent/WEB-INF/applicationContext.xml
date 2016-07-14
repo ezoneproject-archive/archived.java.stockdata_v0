@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- messages -->
+    <bean
+        id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:message</value>
+            </list>
+        </property>
+        <property
+            name="cacheSeconds"
+            value="10" />
+        <property
+            name="defaultEncoding"
+            value="UTF-8" />
+    </bean>
+
+    <bean
+        id="messageSourceAccessor"
+        class="org.springframework.context.support.MessageSourceAccessor">
+        <constructor-arg ref="messageSource" />
+    </bean>
+
+	<!-- database connection -->
+    <context:property-placeholder location="/WEB-INF/db.txt" />
+
+	<!-- datasource -->
+    <bean
+        id="dataSource"
+        class="org.apache.commons.dbcp.BasicDataSource"
+        p:driverClassName="${jdbc.driver}"
+        p:url="${jdbc.url}"
+        p:username="${jdbc.username}"
+        p:password="${jdbc.password}"
+        p:initialSize="3"
+        p:maxActive="10" />
+
+	<!-- hibernate support -->
+    <bean
+        id="sessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+        p:dataSource-ref="dataSource"
+        p:mappingResources="stidx/tables/hibernate.xml">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQL5Dialect
+                </prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean
+        id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+        p:sessionFactory-ref="sessionFactory" />
+
+    <bean
+        id="transactionTemplate"
+        class="org.springframework.transaction.support.TransactionTemplate"
+        p:transactionManager-ref="transactionManager" />
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- dao mapping -->
+    <import resource="mapping-dao.xml" />
+
+</beans>
