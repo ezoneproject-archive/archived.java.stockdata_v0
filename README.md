@@ -5,18 +5,19 @@ stockdata의 최초 버전
 
 ## 환경
 
-* Java (7+)
+* Java 7+
 * Tomcat 6
 * Spring framework 2.5
 * Hibernate 3
 * Bootstrap 3.1
+* Eclipse Luna
 
 ## History
 
 * 2016.7
-     * C# (Winforms) / PHP 버전으로 재구축
+     * C# (Winforms) / PHP 버전으로 재구축 (이 프로젝트는 폐쇄)
 * 2016.6
-     * 집계표 추가
+     * 집계표 view 추가
 * 2015.1
-     * 최초 구축
+     * 최초 구축 (File upload, database, view)
 
